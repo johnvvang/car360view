@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, Html } from "@react-three/drei";
 
 function Model({ color }) {
   const model = useGLTF("/free_car_001.gltf"); // Load model from public folder
@@ -21,9 +21,9 @@ export default function App() {
   const [color, setColor] = useState("#FF0000"); // Default color is red
 
   return (
-    <div style={{ height: "100vh", background: "#000" }}>
+    <div style={{ height: "100vh", background: "#000", position: "relative" }}>
       <h1 style={{ color: "white", textAlign: "center", padding: "10px" }}>
-        My Start Up
+        Test
       </h1>
       <input
         type="color"
@@ -32,9 +32,15 @@ export default function App() {
         style={{ display: "block", margin: "10px auto" }}
       />
       <Canvas camera={{ position: [0, 2, 5] }}>
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
+        <directionalLight position={[-5, -5, -5]} intensity={0.5} />
         <Model color={color} />
+        <Html position={[1.2, 1, 1.5]} center>
+          <div style={{ background: "white", color: "black", fontWeight: "bold", padding: "5px", borderRadius: "5px" }}>
+            test data: 123.456
+          </div>
+        </Html>
         <OrbitControls enableZoom={false} />
       </Canvas>
     </div>
